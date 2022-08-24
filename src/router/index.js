@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AddCategory from '../views/Category/AddCategory.vue'
 
 const routes = [
   {
@@ -16,6 +17,11 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
     }
+  },
+  {
+    path: '/admin/category/add',
+    name: 'addCategory',
+    component: AddCategory
   }
 ]
 
