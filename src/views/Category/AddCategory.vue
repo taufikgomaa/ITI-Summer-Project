@@ -11,17 +11,34 @@
         <form>
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="categoryName"
+              required
+            />
           </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="description"
+              required
+            />
           </div>
           <div class="form-group">
             <label>Image</label>
-            <input type="text" class="form-control" />
+            <input
+              type="url"
+              class="form-control"
+              v-model="imageURL"
+              required
+            />
           </div>
-          <button type="button" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-primary" @click="addCategory">
+            Submit
+          </button>
         </form>
       </div>
       <div class="col-3"></div>
@@ -37,7 +54,23 @@ export default {
       categoryName: "",
       description: "",
       imageUrl: "",
-    }
+    };
+  },
+  methods: {
+    async addCategory() {
+      const newCategory = {
+        categoryName: this.categoryName,
+        description: this.description,
+        imageUrl: this.imageURL,
+      };
+      await fetch("http://localhost:3000/category", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newCategory),
+      });
+    },
   },
 };
 </script>
